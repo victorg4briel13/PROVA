@@ -1,0 +1,168 @@
+#include <stdio.h>
+
+#define MAX_SIZE 10
+
+void soma_matrizes(int matriz1[][MAX_SIZE], int matriz2[][MAX_SIZE], int linhas, int colunas) {
+    int resultado[MAX_SIZE][MAX_SIZE];
+    int i, j;
+
+    for (i = 0; i < linhas; i++) {
+        for (j = 0; j < colunas; j++) {
+            resultado[i][j] = matriz1[i][j] + matriz2[i][j];
+        }
+    }
+
+    printf("\nResultado da Soma de Matrizes:\n");
+    for (i = 0; i < linhas; i++) {
+        for (j = 0; j < colunas; j++) {
+            printf("%d ", resultado[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void subtrai_matrizes(int matriz1[][MAX_SIZE], int matriz2[][MAX_SIZE], int linhas, int colunas) {
+    int resultado[MAX_SIZE][MAX_SIZE];
+    int i, j;
+
+    for (i = 0; i < linhas; i++) {
+        for (j = 0; j < colunas; j++) {
+            resultado[i][j] = matriz1[i][j] - matriz2[i][j];
+        }
+    }
+
+    printf("\nResultado da Subtração de Matrizes:\n");
+    for (i = 0; i < linhas; i++) {
+        for (j = 0; j < colunas; j++) {
+            printf("%d ", resultado[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void multiplica_matrizes(int matriz1[][MAX_SIZE], int matriz2[][MAX_SIZE], int linhas1, int colunas1, int colunas2) {
+    int resultado[MAX_SIZE][MAX_SIZE];
+    int i, j, k;
+
+    for (i = 0; i < linhas1; i++) {
+        for (j = 0; j < colunas2; j++) {
+            resultado[i][j] = 0;
+            for (k = 0; k < colunas1; k++) {
+                resultado[i][j] += matriz1[i][k] * matriz2[k][j];
+            }
+        }
+    }
+
+    printf("\nResultado da Multiplicação de Matrizes:\n");
+    for (i = 0; i < linhas1; i++) {
+        for (j = 0; j < colunas2; j++) {
+            printf("%d ", resultado[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void criar_matriz(int matriz[][MAX_SIZE], int linhas, int colunas) {
+    int i, j;
+
+    for (i = 0; i < linhas; i++) {
+        for (j = 0; j < colunas; j++) {
+            printf("Digite o elemento da posição (%d, %d): ", i+1, j+1);
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+}
+
+int main() {
+    int matriz1[MAX_SIZE][MAX_SIZE];
+    int matriz2[MAX_SIZE][MAX_SIZE];
+    int linhas1, colunas1, linhas2, colunas2;
+    int escolha;
+
+    printf("Programa de Operações com Matrizes\n");
+    printf("1. Soma de Matrizes\n");
+    printf("2. Subtração de Matrizes\n");
+    printf("3. Multiplicação de Matrizes\n");
+    printf("Escolha a operação (1/2/3): ");
+    scanf("%d", &escolha);
+
+    switch (escolha) {
+        case 1:
+            printf("Digite o número de linhas da matriz 1: ");
+            scanf("%d", &linhas1);
+            printf("Digite o número de colunas da matriz 1: ");
+            scanf("%d", &colunas1);
+            printf("Digite os elementos da matriz 1:\n");
+            criar_matriz(matriz1, linhas1, colunas1);
+
+            printf("Digite o número de linhas da matriz 2: ");
+            scanf("%d", &linhas2);
+            printf("Digite o número de colunas da matriz 2: ");
+            scanf("%d", &colunas2);
+            printf("Digite os elementos da matriz 2:\n");
+            criar_matriz(matriz2, linhas2, colunas2);
+
+            // Verifica se as matrizes têm dimensões compatíveis para a soma
+            if (linhas1 != linhas2 || colunas1 != colunas2) {
+                printf("As matrizes não podem ser somadas. Verifique as dimensões.\n");
+                return 0;
+            }
+
+            soma_matrizes(matriz1, matriz2, linhas1, colunas1);
+            break;
+
+        case 2:
+            printf("Digite o número de linhas da matriz 1: ");
+            scanf("%d", &linhas1);
+            printf("Digite o número de colunas da matriz 1: ");
+            scanf("%d", &colunas1);
+            printf("Digite os elementos da matriz 1:\n");
+            criar_matriz(matriz1, linhas1, colunas1);
+
+            printf("Digite o número de linhas da matriz 2: ");
+            scanf("%d", &linhas2);
+            printf("Digite o número de colunas da matriz 2: ");
+            scanf("%d", &colunas2);
+            printf("Digite os elementos da matriz 2:\n");
+            criar_matriz(matriz2, linhas2, colunas2);
+
+            // Verifica se as matrizes têm dimensões compatíveis para a subtração
+            if (linhas1 != linhas2 || colunas1 != colunas2) {
+                printf("As matrizes não podem ser subtraídas. Verifique as dimensões.\n");
+                return 0;
+            }
+
+            subtrai_matrizes(matriz1, matriz2, linhas1, colunas1);
+            break;
+
+        case 3:
+            printf("Digite o número de linhas da matriz 1: ");
+            scanf("%d", &linhas1);
+            printf("Digite o número de colunas da matriz 1: ");
+            scanf("%d", &colunas1);
+            printf("Digite os elementos da matriz 1:\n");
+            criar_matriz(matriz1, linhas1, colunas1);
+
+            printf("Digite o número de linhas da matriz 2: ");
+            scanf("%d", &linhas2);
+            printf("Digite o número de colunas da matriz 2: ");
+            scanf("%d", &colunas2);
+            printf("Digite os elementos da matriz 2:\n");
+            criar_matriz(matriz2, linhas2, colunas2);
+
+            // Verifica se as matrizes têm dimensões compatíveis para a multiplicação
+            if (colunas1 != linhas2) {
+                printf("As matrizes não podem ser multiplicadas. Verifique as dimensões.\n");
+                return 0;
+            }
+
+            multiplica_matrizes(matriz1, matriz2, linhas1, colunas1, colunas2);
+            break;
+
+        default:
+            printf("Escolha inválida.\n");
+            break;
+    }
+
+    return 0;
+}
