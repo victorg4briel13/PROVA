@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main()
+{
+  //aplicação da biblioteca locale.h
+  setlocale(LC_ALL, "portuguese");
+
+  //declaração de variaveis
+  int matriz[6][6];
+  int i, j;
+  //int contador = 11;
+  int soma2c = 0;
+  int somaDP = 0;
+  int somaAll = 0;
+
+  // Ler a matriz
+  printf("Digite os elementos da matriz:\n");
+    for (i = 0; i < 6; i++) {
+        for (j = 0; j < 6; j++) {
+            printf("Elemento [%d][%d]: ", i, j);
+            scanf("%d", &matriz[i][j]);
+          //matriz[i][j] = contador;
+          //contador++;
+        }
+    }
+
+  //imprimir a matriz
+  printf("\nMATRIZ\n");
+    for (i = 0; i < 6; i++) {
+      printf("\n");
+      for (j = 0; j < 6; j++) {
+          printf(" %d ", matriz[i][j]);
+        }
+    }
+
+  //Dividir cada elemento da segunda coluna por 2 e realizar a soma
+  printf("\n\nSegunda coluna dividida por 2\n");
+  for (i = 0; i < 6; i++) {
+    printf(" %d \n", matriz[i][1]/2);
+  }
+  printf("\nSoma\n");
+  for (i = 0; i < 6; i++) {
+    soma2c = soma2c + matriz[i][1]/2;
+  }
+  printf("[%d]", soma2c);
+
+  //Somar os elementos da diagonal principal
+  printf("\n\nSoma da diagonal principal\n");
+  for (i = 0; i < 6; i++) {
+    somaDP = somaDP + matriz[i][i];
+  }
+  printf("[%d]", somaDP);
+
+  //soma todos os elementos da matriz
+  printf("\n\nSoma de todos os elementos\n");
+  for (i = 0; i < 6; i++) {
+    for (j = 0; j < 6; j++) {
+      somaAll = somaAll + matriz[i][j];
+    }
+  }
+  printf("[%d]", somaAll);
+
+    return 0;
+}
